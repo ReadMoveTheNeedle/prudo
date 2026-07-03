@@ -59,6 +59,15 @@
     justify-content: center;
     overflow: hidden;
   }
+  @media (max-width: 767px) {
+    .section {
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
+      padding-top: 88px;
+      padding-bottom: 72px;
+    }
+  }
   .aurora {
     position: absolute;
     inset: 0;
@@ -86,14 +95,14 @@
 
 <!-- HEADER -->
 <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[#050407]/70 border-b border-white/5">
-  <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-    <a href="index.html" class="text-xl font-semibold tracking-tight">
+  <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-3 md:py-4">
+    <a href="index.html" class="text-lg md:text-xl font-semibold tracking-tight">
       Prudo
     </a>
-    <nav class="flex items-center gap-8 text-sm">
-      <a href="index.html" class="text-white/90 hover:text-white transition-colors duration-300">Home</a>
-      <a href="about.html" class="text-white/55 hover:text-white transition-colors duration-300">About Us</a>
-      <a href="waitlist.html" class="px-4 py-2 rounded-full bg-prudo hover:bg-prudoLight text-white text-sm font-medium transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.35)] hover:shadow-[0_0_30px_rgba(124,58,237,0.55)]">
+    <nav class="flex items-center gap-4 md:gap-8 text-xs md:text-sm">
+      <a href="index.html" class="whitespace-nowrap text-white/90 hover:text-white transition-colors duration-300">Home</a>
+      <a href="about.html" class="whitespace-nowrap text-white/55 hover:text-white transition-colors duration-300">About Us</a>
+      <a href="https://readmovetheneedle.substack.com" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-2.5 py-1.5 md:px-4 md:py-2 rounded-full bg-prudo hover:bg-prudoLight text-white text-[11px] md:text-sm font-medium transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.35)] hover:shadow-[0_0_30px_rgba(124,58,237,0.55)]">
         Join Waitlist
       </a>
     </nav>
@@ -116,8 +125,8 @@
           Better focus.<br/>
           <span class="text-prudoLight">Better results.</span>
         </h1>
-        <p class="mt-7 text-lg text-white/50 max-w-md leading-relaxed">
-          The app that turns your time into efficient work and makes productivity simple.
+        <p class="mt-7 text-lg text-white/70 max-w-md leading-relaxed">
+          The app that helps you increase your productivity and stop wasting your time.
         </p>
         <button id="cta-scroll" class="mt-11 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight">
           Learn about Prudo
@@ -127,26 +136,28 @@
 
       <!-- PRUDO AVATAR -->
       <div class="hero-visual relative flex items-center justify-center">
-        <img src="assets/prudo-neutral.png" alt="Prudo" class="w-full max-w-[340px] h-auto object-contain relative z-10" />
-        <div class="absolute -z-10 w-[440px] h-[440px] rounded-full bg-prudo/15 blur-3xl"></div>
+        <img src="assets/prudo-neutral.png" alt="Prudo" class="w-full max-w-[180px] md:max-w-[340px] h-auto object-contain relative z-10" />
+        <div class="absolute -z-10 w-[230px] h-[230px] md:w-[440px] md:h-[440px] rounded-full bg-prudo/15 blur-3xl"></div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 2: SESSION ENGINEERING -->
+  <!-- SECTION 2: REPORTS -->
   <section class="section grain" id="sec-2">
     <div class="aurora"></div>
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
       <div class="eng-text">
-        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Sessions</p>
+        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Reports</p>
         <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-          Set the time. <span class="text-prudoLight">Show up for it.</span>
+          Start identifying your <span class="text-prudoLight">patterns &amp; get custom advice.</span>
         </h2>
-        <p class="mt-7 text-white/50 text-lg leading-relaxed max-w-md">
-          A session is a clear, concrete block of time you set aside to work. Start it, and Prudo tracks your progress automatically, so you always know exactly how much you've put in.
-        </p>
-        <p class="mt-4 text-white/35 leading-relaxed max-w-md">
-          It's not just a timer. With Session Engineering, you can build proven productivity methods right into your sessions to guide you through the work.
+        <div class="mt-9 flex gap-3 flex-wrap">
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Recommendations</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Time focused</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Weekly report</div>
+        </div>
+        <p class="mt-7 text-white/70 text-lg leading-relaxed max-w-md">
+          Keep track of progress you're actually making. Prudo gives you direct personalized feedback, based on your strengths and weaknesses.
         </p>
         <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="2">
           Continue
@@ -154,53 +165,7 @@
         </button>
       </div>
 
-      <!-- PRUDO TIMER MOCKUP -->
-      <div class="eng-visual flex items-center justify-center">
-        <div class="relative w-[260px] h-[480px] rounded-[36px] glass-border bg-gradient-to-b from-[#13111A] to-[#050407] shadow-[0_0_70px_rgba(124,58,237,0.16)] p-3">
-          <div class="w-full h-full rounded-[28px] bg-black overflow-hidden relative flex items-center justify-center">
-            <div id="tide" class="tide-fill"></div>
-            <div class="relative z-10 text-center">
-              <p class="numeral text-[88px] text-white leading-none">32</p>
-              <p class="text-[11px] text-white/40 mt-2 tracking-widest uppercase">minutes left</p>
-            </div>
-            <div class="absolute top-6 left-0 right-0 flex justify-center">
-              <p class="text-[13px] text-white/55 tracking-widest uppercase font-medium">Deep Work Session</p>
-            </div>
-            <div class="absolute bottom-6 left-0 right-0 flex justify-center">
-              <p class="text-[10px] text-white/25 tracking-wide">tap for controls</p>
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 3: CHECK-INS & REPORTS -->
-  <section class="section grain" id="sec-3">
-    <div class="aurora"></div>
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
-      <div>
-        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Check-ins &amp; Reports</p>
-        <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-          Stop the daily <span class="text-prudoLight">goal drift.</span>
-        </h2>
-        <p class="mt-7 text-white/50 text-lg leading-relaxed max-w-md">
-          Fully customizable Morning and Evening check-ins keep your intentions and your actual day in sync — so plans made at 7am don't quietly dissolve by noon.
-        </p>
-        <p class="mt-4 text-white/35 leading-relaxed max-w-md">
-          Every session feeds your Productivity Reports — clean, data-backed recommendations that show exactly where your focus is leaking and what to adjust next.
-        </p>
-        <div class="mt-9 flex gap-3 flex-wrap">
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/55">Morning check-in</div>
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/55">Evening check-in</div>
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/55">Weekly report</div>
-        </div>
-        <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="3">
-          Continue
-          <span class="inline-block transition-transform duration-500 group-hover:translate-y-1">↓</span>
-        </button>
-      </div>
-
-      <div class="rounded-3xl glass-border bg-white/[0.03] px-4 py-6">
+      <div class="report-visual rounded-3xl glass-border bg-white/[0.03] px-4 py-6">
         <p class="text-xs text-white/40 tracking-widest uppercase mb-1">Weekly session time</p>
         <p class="text-2xl font-semibold mb-6">+34% <span class="text-white/30 text-sm font-normal">vs last week</span></p>
         <svg viewBox="-44 0 488 173" class="w-full" id="report-chart" overflow="visible">
@@ -246,22 +211,27 @@
     </div>
   </section>
 
-  <!-- SECTION 4: PERSONALIZATION -->
-  <section class="section grain" id="sec-4">
+  <!-- SECTION 3: CUSTOMIZABILITY & CHECK-INS -->
+  <section class="section grain" id="sec-3">
     <div class="aurora"></div>
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
       <div class="per-text">
-        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Made Around You</p>
+        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Customizability</p>
         <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-          Prudo adapts to <span class="text-prudoLight">how you work.</span>
+          Customizability <span class="text-prudoLight">and Check-Ins</span>
         </h2>
-        <p class="mt-7 text-white/50 text-lg leading-relaxed max-w-md">
-          Tune Prudo's personality, notification style, and session setup until it feels built for exactly how you work, not the other way around.
+        <div class="mt-9 flex gap-3 flex-wrap">
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Check-Ins</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Get advice</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">2 main personalities</div>
+        </div>
+        <p class="mt-7 text-white/70 text-lg leading-relaxed max-w-md">
+          Customize Prudo's personality, toggle notifications, and choose your advice until the app fits your workflow perfectly.
         </p>
-        <p class="mt-4 text-white/35 leading-relaxed max-w-md">
-          Every check-in and session feeds your feedback. The more you give Prudo to work with, the sharper and more accurate its recommendations get.
+        <p class="mt-4 text-white/60 leading-relaxed max-w-md">
+          Use Check-ins to help you stay reminded and on track and answer short quizzes to get Prudo's science-backed advice.
         </p>
-        <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="4">
+        <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="3">
           Continue
           <span class="inline-block transition-transform duration-500 group-hover:translate-y-1">↓</span>
         </button>
@@ -269,15 +239,61 @@
 
       <!-- PRUDO FEEDBACK MOCKUP -->
       <div class="per-visual flex items-center justify-center">
-        <div class="relative w-[260px] h-[480px] rounded-[36px] glass-border bg-gradient-to-b from-[#13111A] to-[#050407] shadow-[0_0_70px_rgba(124,58,237,0.16)] p-3">
-          <div class="w-full h-full rounded-[28px] bg-app-bg overflow-hidden relative flex flex-col items-center justify-center text-center px-6">
-            <div class="absolute -z-10 w-[220px] h-[220px] rounded-full bg-prudo/15 blur-3xl"></div>
-            <img src="assets/prudo-happy.png" alt="Prudo" class="w-36 h-auto object-contain relative z-10" />
-            <p class="mt-3 text-[11px] text-white/40 tracking-widest uppercase">Session complete</p>
-            <p class="mt-1 text-3xl font-bold tracking-tight text-white">Good job!</p>
-            <p class="mt-1.5 text-[13px] text-white/50">That's your 3rd session today!</p>
-            <button class="mt-6 w-full py-3 rounded-2xl bg-app-accent text-[12px] font-medium text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]">Continue</button>
+        <div class="relative w-[190px] h-[350px] md:w-[260px] md:h-[480px] rounded-[36px] glass-border bg-gradient-to-b from-[#13111A] to-[#050407] shadow-[0_0_70px_rgba(124,58,237,0.16)] p-3">
+          <div class="w-full h-full rounded-[28px] bg-app-bg overflow-hidden relative flex flex-col items-center justify-center text-center px-4 md:px-6">
+            <div class="absolute -z-10 w-[125px] h-[125px] md:w-[220px] md:h-[220px] rounded-full bg-prudo/15 blur-3xl"></div>
+            <img src="assets/prudo-happy-8.png" alt="Prudo" class="w-24 md:w-36 h-auto object-contain relative z-10" />
+            <p class="mt-3 text-[9px] md:text-[11px] text-white/40 tracking-widest uppercase">Session complete</p>
+            <p class="mt-1 text-xl md:text-3xl font-bold tracking-tight text-white">Good job!</p>
+            <p class="mt-1.5 text-[11px] md:text-[13px] text-white/60">That's your 3rd session today!</p>
+            <button class="mt-4 md:mt-6 w-full py-2 md:py-3 rounded-2xl bg-app-accent text-[10px] md:text-[12px] font-medium text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]">Continue</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: SESSIONS -->
+  <section class="section grain" id="sec-4">
+    <div class="aurora"></div>
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
+      <div class="eng-text-2">
+        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Sessions</p>
+        <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+          Start a session. <span class="text-prudoLight">Track your time.</span>
+        </h2>
+        <div class="mt-9 flex gap-3 flex-wrap">
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Scheduling</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Session engineering</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Calendar integration</div>
+        </div>
+        <p class="mt-7 text-white/70 text-lg leading-relaxed max-w-md">
+          No more vague efforts. Sessions give you a dedicated and concrete time to perform your task.
+        </p>
+        <p class="mt-4 text-white/60 leading-relaxed max-w-md">
+          Feeling unmotivated? Prudo can give you feedback. Finished early? No worries, your session still counts. Time for a break? You can track that guilt-free too.
+        </p>
+        <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="4">
+          Continue
+          <span class="inline-block transition-transform duration-500 group-hover:translate-y-1">↓</span>
+        </button>
+      </div>
+
+      <!-- PRUDO TIMER MOCKUP -->
+      <div class="eng-visual-2 flex items-center justify-center">
+        <div class="relative w-[190px] h-[350px] md:w-[260px] md:h-[480px] rounded-[36px] glass-border bg-gradient-to-b from-[#13111A] to-[#050407] shadow-[0_0_70px_rgba(124,58,237,0.16)] p-3">
+          <div class="w-full h-full rounded-[28px] bg-black overflow-hidden relative flex items-center justify-center">
+            <div id="tide" class="tide-fill"></div>
+            <div class="relative z-10 text-center">
+              <p class="numeral text-[56px] md:text-[88px] text-white leading-none">32</p>
+              <p class="text-[11px] text-white/40 mt-2 tracking-widest uppercase">minutes left</p>
+            </div>
+            <div class="absolute top-6 left-0 right-0 flex justify-center">
+              <p class="text-[13px] text-white/55 tracking-widest uppercase font-medium">Deep Work Session</p>
+            </div>
+            <div class="absolute bottom-6 left-0 right-0 flex justify-center">
+              <p class="text-[10px] text-white/25 tracking-wide">tap for controls</p>
+            </div>
         </div>
       </div>
     </div>
@@ -287,8 +303,8 @@
   <section class="section grain" id="sec-5">
     <div class="aurora"></div>
     <div class="text-center px-6">
-      <h2 class="text-3xl md:text-5xl font-semibold tracking-tight">Ready to actually start?</h2>
-      <p class="mt-4 text-white/45 max-w-md mx-auto">Be first to get Prudo when it launches this September.</p>
+      <h2 class="text-3xl md:text-5xl font-semibold tracking-tight">Thinking about productivity can only get you so far.</h2>
+      <p class="mt-4 text-white/65 max-w-md mx-auto">Be first to start executing with Prudo when it launches in September.</p>
       <a href="https://readmovetheneedle.substack.com" target="_blank" rel="noopener noreferrer" class="inline-block mt-11 px-8 py-4 rounded-full bg-prudo hover:bg-prudoLight transition-all duration-500 text-base font-medium shadow-[0_0_30px_rgba(124,58,237,0.4)] hover:shadow-[0_0_45px_rgba(124,58,237,0.6)]">
         Join the Waitlist
       </a>
@@ -315,40 +331,41 @@
     btn.addEventListener('click', () => goTo(parseInt(btn.dataset.next, 10)));
   });
 
-  // Section 2 — text + timer mockup reveal, tide rises
-  gsap.set('.eng-text > *, .eng-visual', { opacity: 0, y: 32 });
+  // Section 2 — reports text + chart reveal, chart draws
+  gsap.set('.eng-text > *, .report-visual', { opacity: 0, y: 32 });
   ScrollTrigger.create({
     trigger: '#sec-2',
     start: 'top 65%',
     onEnter: () => {
       gsap.to('.eng-text > *', { opacity: 1, y: 0, duration: 1, stagger: 0.13, ease: 'power4.out' });
-      gsap.to('.eng-visual', { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
-      gsap.to('#tide', { height: '62%', duration: 2.2, ease: 'power2.inOut', delay: 0.5 });
-    },
-    once: true,
-  });
-
-  // Section 3 — chart draw + fade in
-  gsap.set('#sec-3 > .max-w-6xl > div', { opacity: 0, y: 32 });
-  ScrollTrigger.create({
-    trigger: '#sec-3',
-    start: 'top 70%',
-    onEnter: () => {
-      gsap.to('#sec-3 > .max-w-6xl > div', { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: 'power4.out' });
+      gsap.to('.report-visual', { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
       gsap.to('#chart-line', { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut', delay: 0.35 });
       gsap.from('#chart-fill', { opacity: 0, duration: 1.3, delay: 0.7 });
     },
     once: true,
   });
 
-  // Section 4 — personalization text + feedback mockup reveal
+  // Section 3 — customizability text + feedback mockup reveal
   gsap.set('.per-text > *, .per-visual', { opacity: 0, y: 32 });
   ScrollTrigger.create({
-    trigger: '#sec-4',
+    trigger: '#sec-3',
     start: 'top 65%',
     onEnter: () => {
       gsap.to('.per-text > *', { opacity: 1, y: 0, duration: 1, stagger: 0.13, ease: 'power4.out' });
       gsap.to('.per-visual', { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
+    },
+    once: true,
+  });
+
+  // Section 4 — sessions text + timer mockup reveal, tide rises
+  gsap.set('.eng-text-2 > *, .eng-visual-2', { opacity: 0, y: 32 });
+  ScrollTrigger.create({
+    trigger: '#sec-4',
+    start: 'top 65%',
+    onEnter: () => {
+      gsap.to('.eng-text-2 > *', { opacity: 1, y: 0, duration: 1, stagger: 0.13, ease: 'power4.out' });
+      gsap.to('.eng-visual-2', { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
+      gsap.to('#tide', { height: '62%', duration: 2.2, ease: 'power2.inOut', delay: 0.5 });
     },
     once: true,
   });
@@ -381,7 +398,9 @@
 
   let currentIndex = 0;
   let wheelTimeout;
+  const isSnapEnabled = () => window.matchMedia('(min-width: 768px)').matches;
   window.addEventListener('wheel', (e) => {
+    if (!isSnapEnabled()) return;
     if (scrollingLock) { e.preventDefault(); return; }
     clearTimeout(wheelTimeout);
     wheelTimeout = setTimeout(() => {
