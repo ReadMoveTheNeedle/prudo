@@ -160,14 +160,15 @@
           <div class="w-full h-full rounded-[28px] bg-black overflow-hidden relative flex items-center justify-center">
             <div id="tide" class="tide-fill"></div>
             <div class="relative z-10 text-center">
-              <p class="text-[10px] text-white/40 tracking-widest uppercase mb-4">Deep Work Session</p>
               <p class="numeral text-[88px] text-white leading-none">32</p>
               <p class="text-[11px] text-white/40 mt-2 tracking-widest uppercase">minutes left</p>
+            </div>
+            <div class="absolute top-6 left-0 right-0 flex justify-center">
+              <p class="text-[13px] text-white/55 tracking-widest uppercase font-medium">Deep Work Session</p>
             </div>
             <div class="absolute bottom-6 left-0 right-0 flex justify-center">
               <p class="text-[10px] text-white/25 tracking-wide">tap for controls</p>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -178,7 +179,7 @@
     <div class="aurora"></div>
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
       <div>
-        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Weekly session time</p>
+        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Check-ins &amp; Reports</p>
         <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
           Stop the daily <span class="text-prudoLight">goal drift.</span>
         </h2>
@@ -199,10 +200,10 @@
         </button>
       </div>
 
-      <div class="rounded-3xl glass-border bg-white/[0.03] p-8">
-        <p class="text-xs text-white/40 tracking-widest uppercase mb-1">Weekly focus trend</p>
+      <div class="rounded-3xl glass-border bg-white/[0.03] px-4 py-6">
+        <p class="text-xs text-white/40 tracking-widest uppercase mb-1">Weekly session time</p>
         <p class="text-2xl font-semibold mb-6">+34% <span class="text-white/30 text-sm font-normal">vs last week</span></p>
-        <svg viewBox="-44 0 444 160" class="w-full" id="report-chart" overflow="visible">
+        <svg viewBox="-44 0 488 173" class="w-full" id="report-chart" overflow="visible">
           <defs>
             <linearGradient id="lineFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.35"/>
@@ -216,20 +217,31 @@
               </feMerge>
             </filter>
           </defs>
-          <!-- Y-axis -->
+          <!-- Y-axis line -->
           <line x1="0" y1="0" x2="0" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-          <text x="-38" y="80" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter,sans-serif" text-anchor="middle" transform="rotate(-90,-38,80)">Hours per day</text>
-          <path id="chart-fill" d="M0,140 L0,120 L57,110 L114,95 L171,100 L228,70 L285,55 L342,40 L400,20 L400,140 Z" fill="url(#lineFill)"/>
-          <path id="chart-line" d="M0,120 L57,110 L114,95 L171,100 L228,70 L285,55 L342,40 L400,20"
+          <!-- Hour labels centered in left margin (-44 to 0), font-size 10 matching day labels -->
+          <text x="-22" y="124" fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">1h</text>
+          <text x="-22" y="98"  fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">2h</text>
+          <text x="-22" y="72"  fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">3h</text>
+          <text x="-22" y="46"  fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">4h</text>
+          <text x="-22" y="20"  fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">5h</text>
+          <!-- Chart: 7 days Mon-Sun at x=0,67,133,200,267,333,400 -->
+          <path id="chart-fill" d="M0,150 L0,120 L67,110 L133,95 L200,100 L267,70 L333,55 L400,20 L400,150 Z" fill="url(#lineFill)"/>
+          <path id="chart-line" d="M0,120 L67,110 L133,95 L200,100 L267,70 L333,55 L400,20"
                 fill="none" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                 pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" filter="url(#lineGlow)"/>
           <g fill="#A78BFA">
             <circle cx="400" cy="20" r="4"/>
           </g>
+          <!-- Day labels inside SVG, aligned to actual data x positions -->
+          <text x="0"   y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Mon</text>
+          <text x="67"  y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Tue</text>
+          <text x="133" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Wed</text>
+          <text x="200" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Thu</text>
+          <text x="267" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Fri</text>
+          <text x="333" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Sat</text>
+          <text x="400" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Sun</text>
         </svg>
-        <div class="mt-4 flex justify-between text-[10px] text-white/30">
-          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-        </div>
       </div>
     </div>
   </section>
@@ -264,7 +276,7 @@
             <p class="mt-3 text-[11px] text-white/40 tracking-widest uppercase">Session complete</p>
             <p class="mt-1 text-3xl font-bold tracking-tight text-white">Good job!</p>
             <p class="mt-1.5 text-[13px] text-white/50">That's your 3rd session today!</p>
-            <div class="absolute bottom-0 left-0 right-0 py-3 rounded-t-lg bg-app-accent flex items-center justify-center text-[12px] font-medium text-white shadow-[0_0_25px_rgba(99,102,241,0.45)]">Continue</div>
+            <button class="mt-6 w-full py-3 rounded-2xl bg-app-accent text-[12px] font-medium text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]">Continue</button>
           </div>
         </div>
       </div>
