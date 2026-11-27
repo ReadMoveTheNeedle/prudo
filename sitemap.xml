@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  PRUDO SITEMAP
+  Submit to Google Search Console: https://search.google.com/search-console
+  Submit URL: https://prudo.app/sitemap.xml
+
+  EDITING GUIDE:
+  - <loc>         Full URL of the page
+  - <lastmod>     Date you last changed the page (YYYY-MM-DD)
+  - <changefreq>  How often Google should re-crawl: always / hourly / daily / weekly / monthly / yearly / never
+  - <priority>    Relative importance 0.0–1.0 (homepage = 1.0, others lower)
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- HOME — main marketing page -->
+  <url>
+    <loc>https://prudo.app/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ABOUT US -->
+  <url>
+    <loc>https://prudo.app/about.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://prudo.app/privacy.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+</urlset>

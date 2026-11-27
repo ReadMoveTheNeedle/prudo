@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Prudo — Better work. Better focus. Better results.</title>
-<meta name="description" content="Prudo enforces your time blocks, walks you into each session with a science-backed start ritual, and learns your weak points to help you adjust." />
+<title>Prudo · Stop planning your goals. Start reaching them.</title>
+<meta name="description" content="Prudo takes your goal and applies all the productivity systems you need to actually achieve it: weekly hours, milestones, time blocks and priorities." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -43,7 +43,6 @@
   body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
   ::-webkit-scrollbar { width: 0px; background: transparent; }
 
-  .glow-text { text-shadow: 0 0 28px rgba(124, 58, 237, 0.55); }
   .glass-border { border: 1px solid rgba(124, 58, 237, 0.22); }
   .grain {
     background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 0);
@@ -89,6 +88,20 @@
     background: #0e2747;
   }
   .numeral { font-weight: 200; letter-spacing: -0.02em; }
+  /* Next 3 card, same violet as the app */
+  .next3 {
+    background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .next3::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.10) 48%, transparent 62%);
+    pointer-events: none;
+  }
+  .wl-input:focus { outline: none; border-color: rgba(167,139,250,0.7); }
 </style>
 </head>
 <body class="text-white antialiased">
@@ -96,13 +109,11 @@
 <!-- HEADER -->
 <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[#050407]/70 border-b border-white/5">
   <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-3 md:py-4">
-    <a href="index.html" class="text-lg md:text-xl font-semibold tracking-tight">
-      Prudo
-    </a>
+    <a href="index.html" class="text-lg md:text-xl font-semibold tracking-tight">Prudo</a>
     <nav class="flex items-center gap-4 md:gap-8 text-xs md:text-sm">
       <a href="index.html" class="whitespace-nowrap text-white/90 hover:text-white transition-colors duration-300">Home</a>
       <a href="about.html" class="whitespace-nowrap text-white/55 hover:text-white transition-colors duration-300">About Us</a>
-      <a href="https://readmovetheneedle.substack.com" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-2.5 py-1.5 md:px-4 md:py-2 rounded-full bg-prudo hover:bg-prudoLight text-white text-[11px] md:text-sm font-medium transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.35)] hover:shadow-[0_0_30px_rgba(124,58,237,0.55)]">
+      <a href="#sec-5" id="nav-waitlist" class="whitespace-nowrap px-2.5 py-1.5 md:px-4 md:py-2 rounded-full bg-prudo hover:bg-prudoLight text-white text-[11px] md:text-sm font-medium transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.35)] hover:shadow-[0_0_30px_rgba(124,58,237,0.55)]">
         Join Waitlist
       </a>
     </nav>
@@ -118,23 +129,21 @@
       <div class="hero-text">
         <div class="inline-flex items-center gap-2 mb-7 px-3 py-1 rounded-full glass-border bg-white/[0.03] text-xs text-prudoLight">
           <span class="w-1.5 h-1.5 rounded-full bg-prudo pulse-dot"></span>
-          Launching September
+          Coming soon
         </div>
         <h1 class="text-4xl md:text-6xl font-semibold leading-[1.06] tracking-tight">
-          Better work.<br/>
-          Better focus.<br/>
-          <span class="text-prudoLight">Better results.</span>
+          Stop planning your goals.<br/>
+          <span class="text-prudoLight">Start reaching them.</span>
         </h1>
         <p class="mt-7 text-lg text-white/70 max-w-md leading-relaxed">
-          The app that helps you increase your productivity and stop wasting your time.
+          Prudo takes your goal and applies all the productivity systems you need to actually achieve it.
         </p>
         <button id="cta-scroll" class="mt-11 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight">
-          Learn about Prudo
+          See how it works
           <span class="inline-block transition-transform duration-500 group-hover:translate-y-1">↓</span>
         </button>
       </div>
 
-      <!-- PRUDO AVATAR -->
       <div class="hero-visual relative flex items-center justify-center">
         <img src="assets/prudo-neutral.png" alt="Prudo" class="w-full max-w-[180px] md:max-w-[340px] h-auto object-contain relative z-10" />
         <div class="absolute -z-10 w-[230px] h-[230px] md:w-[440px] md:h-[440px] rounded-full bg-prudo/15 blur-3xl"></div>
@@ -142,22 +151,22 @@
     </div>
   </section>
 
-  <!-- SECTION 2: REPORTS -->
+  <!-- SECTION 2: PROGRESS (milestones, weekly hours, reviews) -->
   <section class="section grain" id="sec-2">
     <div class="aurora"></div>
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
-      <div class="eng-text">
-        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Reports</p>
+      <div class="s2-text">
+        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Progress</p>
         <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-          Start identifying your <span class="text-prudoLight">patterns &amp; get custom advice.</span>
+          See yourself <span class="text-prudoLight">getting closer.</span>
         </h2>
         <div class="mt-9 flex gap-3 flex-wrap">
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Recommendations</div>
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Time focused</div>
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Weekly report</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Weekly hours</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Milestones</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Weekly reviews</div>
         </div>
         <p class="mt-7 text-white/70 text-lg leading-relaxed max-w-md">
-          Keep track of progress you're actually making. Prudo gives you direct personalized feedback, based on your strengths and weaknesses.
+          Set how many hours a week you want to put in, and Prudo gives you all your productivity data to help you improve. You get milestones to chase and weekly reviews that show your progress.
         </p>
         <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="2">
           Continue
@@ -165,71 +174,87 @@
         </button>
       </div>
 
-      <div class="report-visual rounded-3xl glass-border bg-white/[0.03] px-4 py-6">
-        <p class="text-xs text-white/40 tracking-widest uppercase mb-1">Weekly session time</p>
-        <p class="text-2xl font-semibold mb-6">+34% <span class="text-white/30 text-sm font-normal">vs last week</span></p>
-        <svg viewBox="-44 0 488 173" class="w-full" id="report-chart" overflow="visible">
+      <div class="s2-visual rounded-3xl glass-border bg-white/[0.03] px-5 py-6 max-w-md w-full mx-auto">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-1 rounded-full bg-white/[0.05] p-1 text-[11px]">
+            <span class="px-3 py-1 rounded-full text-white/40">Week</span>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-white">Month</span>
+            <span class="px-3 py-1 rounded-full text-white/40">All</span>
+          </div>
+          <p class="text-xs text-white/50">This month</p>
+        </div>
+        <p class="text-[11px] text-white/40 tracking-widest uppercase mb-1">Focus time</p>
+        <div class="flex items-baseline gap-3 mb-6">
+          <p class="text-3xl font-semibold">39.75<span class="text-base text-white/50">h</span></p>
+          <span class="px-2 py-0.5 rounded-md text-xs font-medium" style="background:rgba(34,197,94,0.15);color:#4ade80">↑ 22%</span>
+          <span class="text-xs text-white/40">vs last month</span>
+        </div>
+        <svg viewBox="-34 -6 446 180" class="w-full" overflow="visible">
           <defs>
-            <linearGradient id="lineFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+            <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.38"/>
+              <stop offset="60%" stop-color="#7c3aed" stop-opacity="0.1"/>
+              <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
             </linearGradient>
-            <filter id="lineGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="4" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
+            <filter id="softGlow" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="6"/></filter>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#e9d5ff"/>
+              <stop offset="100%" stop-color="#a78bfa"/>
+            </linearGradient>
           </defs>
-          <!-- Y-axis line -->
-          <line x1="0" y1="0" x2="0" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-          <!-- Hour labels centered in left margin (-44 to 0), font-size 10 matching day labels -->
-          <text x="-22" y="124" fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">1h</text>
-          <text x="-22" y="98"  fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">2h</text>
-          <text x="-22" y="72"  fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">3h</text>
-          <text x="-22" y="46"  fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">4h</text>
-          <text x="-22" y="20"  fill="rgba(255,255,255,0.28)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">5h</text>
-          <!-- Chart: 7 days Mon-Sun at x=0,67,133,200,267,333,400 -->
-          <path id="chart-fill" d="M0,150 L0,120 L67,110 L133,95 L200,100 L267,70 L333,55 L400,20 L400,150 Z" fill="url(#lineFill)"/>
-          <path id="chart-line" d="M0,120 L67,110 L133,95 L200,100 L267,70 L333,55 L400,20"
-                fill="none" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" filter="url(#lineGlow)"/>
-          <g fill="#A78BFA">
-            <circle cx="400" cy="20" r="4"/>
+          <g stroke="#fff" stroke-width="1">
+            <line x1="0" y1="0" x2="400" y2="0" stroke-opacity="0.06" stroke-dasharray="2 6"/>
+            <line x1="0" y1="75" x2="400" y2="75" stroke-opacity="0.06" stroke-dasharray="2 6"/>
+            <line x1="0" y1="150" x2="400" y2="150" stroke-opacity="0.08"/>
           </g>
-          <!-- Day labels inside SVG, aligned to actual data x positions -->
-          <text x="0"   y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Mon</text>
-          <text x="67"  y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Tue</text>
-          <text x="133" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Wed</text>
-          <text x="200" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Thu</text>
-          <text x="267" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Fri</text>
-          <text x="333" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Sat</text>
-          <text x="400" y="165" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Sun</text>
+          <g fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="end">
+            <text x="-8" y="4">3h</text>
+            <text x="-8" y="79">1.5h</text>
+            <text x="-8" y="154">0h</text>
+          </g>
+          <path id="chart-fill" d="M0.0,120.0 C2.3,117.9 9.2,110.8 13.8,107.5 C18.4,104.2 23.0,99.6 27.6,100.0 C32.2,100.4 36.8,109.6 41.4,110.0 C46.0,110.4 50.6,101.7 55.2,102.5 C59.8,103.3 64.4,112.1 69.0,115.0 C73.6,117.9 78.2,121.7 82.8,120.0 C87.4,118.3 92.0,109.6 96.6,105.0 C101.1,100.4 105.7,95.8 110.3,92.5 C114.9,89.2 119.5,84.6 124.1,85.0 C128.7,85.4 133.3,92.5 137.9,95.0 C142.5,97.5 147.1,101.2 151.7,100.0 C156.3,98.8 160.9,87.9 165.5,87.5 C170.1,87.1 174.7,96.2 179.3,97.5 C183.9,98.8 188.5,97.5 193.1,95.0 C197.7,92.5 202.3,86.7 206.9,82.5 C211.5,78.3 216.1,71.2 220.7,70.0 C225.3,68.8 229.9,72.9 234.5,75.0 C239.1,77.1 243.7,83.8 248.3,82.5 C252.9,81.2 257.5,68.8 262.1,67.5 C266.7,66.3 271.3,72.1 275.9,75.0 C280.5,77.9 285.1,85.4 289.7,85.0 C294.3,84.6 298.9,77.1 303.4,72.5 C308.0,67.9 312.6,59.6 317.2,57.5 C321.8,55.4 326.4,58.8 331.0,60.0 C335.6,61.2 340.2,66.7 344.8,65.0 C349.4,63.3 354.0,53.8 358.6,50.0 C363.2,46.2 367.8,42.1 372.4,42.5 C377.0,42.9 381.6,53.3 386.2,52.5 C390.8,51.7 397.7,40.0 400.0,37.5 L400,150 L0,150 Z" fill="url(#areaFill)"/>
+          <path d="M0.0,120.0 C2.3,117.9 9.2,110.8 13.8,107.5 C18.4,104.2 23.0,99.6 27.6,100.0 C32.2,100.4 36.8,109.6 41.4,110.0 C46.0,110.4 50.6,101.7 55.2,102.5 C59.8,103.3 64.4,112.1 69.0,115.0 C73.6,117.9 78.2,121.7 82.8,120.0 C87.4,118.3 92.0,109.6 96.6,105.0 C101.1,100.4 105.7,95.8 110.3,92.5 C114.9,89.2 119.5,84.6 124.1,85.0 C128.7,85.4 133.3,92.5 137.9,95.0 C142.5,97.5 147.1,101.2 151.7,100.0 C156.3,98.8 160.9,87.9 165.5,87.5 C170.1,87.1 174.7,96.2 179.3,97.5 C183.9,98.8 188.5,97.5 193.1,95.0 C197.7,92.5 202.3,86.7 206.9,82.5 C211.5,78.3 216.1,71.2 220.7,70.0 C225.3,68.8 229.9,72.9 234.5,75.0 C239.1,77.1 243.7,83.8 248.3,82.5 C252.9,81.2 257.5,68.8 262.1,67.5 C266.7,66.3 271.3,72.1 275.9,75.0 C280.5,77.9 285.1,85.4 289.7,85.0 C294.3,84.6 298.9,77.1 303.4,72.5 C308.0,67.9 312.6,59.6 317.2,57.5 C321.8,55.4 326.4,58.8 331.0,60.0 C335.6,61.2 340.2,66.7 344.8,65.0 C349.4,63.3 354.0,53.8 358.6,50.0 C363.2,46.2 367.8,42.1 372.4,42.5 C377.0,42.9 381.6,53.3 386.2,52.5 C390.8,51.7 397.7,40.0 400.0,37.5" fill="none" stroke="#a78bfa" stroke-opacity="0.35" stroke-width="10" stroke-linecap="round" filter="url(#softGlow)"/>
+          <path id="chart-line" d="M0.0,120.0 C2.3,117.9 9.2,110.8 13.8,107.5 C18.4,104.2 23.0,99.6 27.6,100.0 C32.2,100.4 36.8,109.6 41.4,110.0 C46.0,110.4 50.6,101.7 55.2,102.5 C59.8,103.3 64.4,112.1 69.0,115.0 C73.6,117.9 78.2,121.7 82.8,120.0 C87.4,118.3 92.0,109.6 96.6,105.0 C101.1,100.4 105.7,95.8 110.3,92.5 C114.9,89.2 119.5,84.6 124.1,85.0 C128.7,85.4 133.3,92.5 137.9,95.0 C142.5,97.5 147.1,101.2 151.7,100.0 C156.3,98.8 160.9,87.9 165.5,87.5 C170.1,87.1 174.7,96.2 179.3,97.5 C183.9,98.8 188.5,97.5 193.1,95.0 C197.7,92.5 202.3,86.7 206.9,82.5 C211.5,78.3 216.1,71.2 220.7,70.0 C225.3,68.8 229.9,72.9 234.5,75.0 C239.1,77.1 243.7,83.8 248.3,82.5 C252.9,81.2 257.5,68.8 262.1,67.5 C266.7,66.3 271.3,72.1 275.9,75.0 C280.5,77.9 285.1,85.4 289.7,85.0 C294.3,84.6 298.9,77.1 303.4,72.5 C308.0,67.9 312.6,59.6 317.2,57.5 C321.8,55.4 326.4,58.8 331.0,60.0 C335.6,61.2 340.2,66.7 344.8,65.0 C349.4,63.3 354.0,53.8 358.6,50.0 C363.2,46.2 367.8,42.1 372.4,42.5 C377.0,42.9 381.6,53.3 386.2,52.5 C390.8,51.7 397.7,40.0 400.0,37.5" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+          <line id="chart-dot" x1="400.0" y1="37.5" x2="400.0" y2="150" stroke="#a78bfa" stroke-opacity="0.35" stroke-dasharray="2 4"/>
+          <circle id="chart-dot2" cx="400.0" cy="37.5" r="5" fill="#0f0f11" stroke="#e9d5ff" stroke-width="2.5"/>
+          <g fill="rgba(255,255,255,0.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">
+            <text x="0.0" y="168">1</text>
+            <text x="96.6" y="168">8</text>
+            <text x="193.1" y="168">15</text>
+            <text x="289.7" y="168">22</text>
+            <text x="386.2" y="168">29</text>
+          </g>
         </svg>
+        <div class="mt-5 flex items-center gap-3 rounded-2xl bg-white/[0.04] px-4 py-3 glass-border">
+          <span class="w-6 h-6 shrink-0 rounded-full bg-prudo flex items-center justify-center text-[12px]">✓</span>
+          <div>
+            <p class="text-[11px] text-prudoLight tracking-widest uppercase">Milestone reached</p>
+            <p class="text-white text-[14px]">3 months consistent</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3: CUSTOMIZABILITY & CHECK-INS -->
+  <!-- SECTION 3: TIME BLOCKS + CHECK-INS -->
   <section class="section grain" id="sec-3">
     <div class="aurora"></div>
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
-      <div class="per-text">
-        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Customizability</p>
+      <div class="s3-text">
+        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Time blocks</p>
         <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-          Customizability <span class="text-prudoLight">and Check-Ins</span>
+          Make working on your goal <span class="text-prudoLight">actionable.</span>
         </h2>
         <div class="mt-9 flex gap-3 flex-wrap">
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Check-Ins</div>
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Get advice</div>
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">2 main personalities</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Time blocks</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Flexible scheduling</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Evening check-in</div>
         </div>
         <p class="mt-7 text-white/70 text-lg leading-relaxed max-w-md">
-          Customize Prudo's personality, toggle notifications, and choose your advice until the app fits your workflow perfectly.
+          Schedule and block time for your goal. Take breaks when you need them, finish early when you're faster than usual, and reschedule when you're short on time.
         </p>
         <p class="mt-4 text-white/60 leading-relaxed max-w-md">
-          Use Check-ins to help you stay reminded and on track and answer short quizzes to get Prudo's science-backed advice.
+          At night, Prudo can send you a notification to reflect on your day and leave a message for yourself for tomorrow.
         </p>
         <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="3">
           Continue
@@ -237,50 +262,7 @@
         </button>
       </div>
 
-      <!-- PRUDO FEEDBACK MOCKUP -->
-      <div class="per-visual flex items-center justify-center">
-        <div class="relative w-[190px] h-[350px] md:w-[260px] md:h-[480px] rounded-[36px] glass-border bg-gradient-to-b from-[#13111A] to-[#050407] shadow-[0_0_70px_rgba(124,58,237,0.16)] p-3">
-          <div class="w-full h-full rounded-[28px] bg-app-bg overflow-hidden relative flex flex-col items-center justify-center text-center px-4 md:px-6">
-            <div class="absolute -z-10 w-[125px] h-[125px] md:w-[220px] md:h-[220px] rounded-full bg-prudo/15 blur-3xl"></div>
-            <img src="assets/prudo-happy-8.png" alt="Prudo" class="w-24 md:w-36 h-auto object-contain relative z-10" />
-            <p class="mt-3 text-[9px] md:text-[11px] text-white/40 tracking-widest uppercase">Session complete</p>
-            <p class="mt-1 text-xl md:text-3xl font-bold tracking-tight text-white">Good job!</p>
-            <p class="mt-1.5 text-[11px] md:text-[13px] text-white/60">That's your 3rd session today!</p>
-            <button class="mt-4 md:mt-6 w-full py-2 md:py-3 rounded-2xl bg-app-accent text-[10px] md:text-[12px] font-medium text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]">Continue</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 4: SESSIONS -->
-  <section class="section grain" id="sec-4">
-    <div class="aurora"></div>
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
-      <div class="eng-text-2">
-        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Sessions</p>
-        <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
-          Start a session. <span class="text-prudoLight">Track your time.</span>
-        </h2>
-        <div class="mt-9 flex gap-3 flex-wrap">
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Scheduling</div>
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Session engineering</div>
-          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Calendar integration</div>
-        </div>
-        <p class="mt-7 text-white/70 text-lg leading-relaxed max-w-md">
-          No more vague efforts. Sessions give you a dedicated and concrete time to perform your task.
-        </p>
-        <p class="mt-4 text-white/60 leading-relaxed max-w-md">
-          Feeling unmotivated? Prudo can give you feedback. Finished early? No worries, your session still counts. Time for a break? You can track that guilt-free too.
-        </p>
-        <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="4">
-          Continue
-          <span class="inline-block transition-transform duration-500 group-hover:translate-y-1">↓</span>
-        </button>
-      </div>
-
-      <!-- PRUDO TIMER MOCKUP -->
-      <div class="eng-visual-2 flex items-center justify-center">
+      <div class="s3-visual flex items-center justify-center">
         <div class="relative w-[190px] h-[350px] md:w-[260px] md:h-[480px] rounded-[36px] glass-border bg-gradient-to-b from-[#13111A] to-[#050407] shadow-[0_0_70px_rgba(124,58,237,0.16)] p-3">
           <div class="w-full h-full rounded-[28px] bg-black overflow-hidden relative flex items-center justify-center">
             <div id="tide" class="tide-fill"></div>
@@ -289,31 +271,123 @@
               <p class="text-[11px] text-white/40 mt-2 tracking-widest uppercase">minutes left</p>
             </div>
             <div class="absolute top-6 left-0 right-0 flex justify-center">
-              <p class="text-[13px] text-white/55 tracking-widest uppercase font-medium">Deep Work Session</p>
+              <p class="text-[13px] text-white/55 tracking-widest uppercase font-medium">Writing ✍️</p>
             </div>
             <div class="absolute bottom-6 left-0 right-0 flex justify-center">
               <p class="text-[10px] text-white/25 tracking-wide">tap for controls</p>
             </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FINAL CTA -->
+  <!-- SECTION 4: PRIORITIES + GET ADVICE -->
+  <section class="section grain" id="sec-4">
+    <div class="aurora"></div>
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center w-full">
+      <div class="s4-text">
+        <p class="text-prudoLight text-sm font-medium tracking-widest uppercase mb-4">Priorities</p>
+        <h2 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+          Always know <span class="text-prudoLight">your next step.</span>
+        </h2>
+        <div class="mt-9 flex gap-3 flex-wrap">
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Your next 3 tasks</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Priority 1, 2, 3</div>
+          <div class="px-4 py-2 rounded-full glass-border bg-white/[0.03] text-xs text-white/70">Get Advice</div>
+        </div>
+        <p class="mt-7 text-white/70 text-lg leading-relaxed max-w-md">
+          Most goals fail without a way to prioritize. Put every task for your goal in one place, sort them by what matters most, and Prudo keeps your next 3 right in front of you.
+        </p>
+        <p class="mt-4 text-white/60 leading-relaxed max-w-md">
+          Need productivity advice? Use Get Advice to find a specific solution, tailored to your goal.
+        </p>
+        <button class="continue-btn mt-9 group flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 glass-border transition-all duration-500 text-sm font-bold tracking-tight" data-next="4">
+          Continue
+          <span class="inline-block transition-transform duration-500 group-hover:translate-y-1">↓</span>
+        </button>
+      </div>
+
+      <div class="s4-visual flex flex-col gap-3 max-w-sm w-full mx-auto">
+        <div class="next3 rounded-3xl px-6 py-5 shadow-[0_0_60px_rgba(109,40,217,0.35)]">
+          <p class="text-[11px] text-white/70 tracking-widest uppercase mb-3">Your next 3</p>
+          <div class="flex flex-col gap-2.5 relative z-10">
+            <div class="flex items-center gap-3"><span class="text-white/50 text-sm w-4">1</span><span class="text-white text-[15px]">Outline chapter 3</span></div>
+            <div class="flex items-center gap-3"><span class="text-white/50 text-sm w-4">2</span><span class="text-white text-[15px]">Write 500 words</span></div>
+            <div class="flex items-center gap-3"><span class="text-white/50 text-sm w-4">3</span><span class="text-white text-[15px]">Send the draft to Sam</span></div>
+          </div>
+        </div>
+        <div class="rounded-3xl glass-border bg-white/[0.03] px-6 py-5">
+          <p class="text-[11px] text-prudoLight tracking-widest uppercase mb-3">Priority 1</p>
+          <div class="flex flex-col gap-2.5">
+            <span class="text-white/80 text-[15px]">Pick a title</span>
+            <div class="h-px bg-white/5"></div>
+            <span class="text-white/80 text-[15px]">Research publishers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: WAITLIST -->
   <section class="section grain" id="sec-5">
     <div class="aurora"></div>
-    <div class="text-center px-6">
-      <h2 class="text-3xl md:text-5xl font-semibold tracking-tight">Thinking about productivity can only get you so far.</h2>
-      <p class="mt-4 text-white/65 max-w-md mx-auto">Be first to start executing with Prudo when it launches in September.</p>
-      <a href="https://readmovetheneedle.substack.com" target="_blank" rel="noopener noreferrer" class="inline-block mt-11 px-8 py-4 rounded-full bg-prudo hover:bg-prudoLight transition-all duration-500 text-base font-medium shadow-[0_0_30px_rgba(124,58,237,0.4)] hover:shadow-[0_0_45px_rgba(124,58,237,0.6)]">
-        Join the Waitlist
-      </a>
+    <div class="s5 text-center px-6 max-w-xl w-full">
+      <img src="assets/prudo-happy-8.png" alt="Prudo" class="w-20 md:w-24 h-auto mx-auto mb-6" />
+      <h2 class="text-3xl md:text-5xl font-semibold tracking-tight">Thinking about your goal can only get you so far.</h2>
+      <p class="mt-4 text-white/65 max-w-md mx-auto">Join the waitlist and get Prudo 3 days before everyone else.</p>
+      <form class="wl-form mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto" novalidate>
+        <input type="email" name="email" required autocomplete="email" placeholder="Your email"
+               class="wl-input flex-1 px-5 py-4 rounded-full bg-white/[0.04] border border-white/10 text-white placeholder-white/30 text-base" />
+        <button type="submit" class="px-8 py-4 rounded-full bg-prudo hover:bg-prudoLight transition-all duration-500 text-base font-medium shadow-[0_0_30px_rgba(124,58,237,0.4)] hover:shadow-[0_0_45px_rgba(124,58,237,0.6)] whitespace-nowrap">
+          Join the Waitlist
+        </button>
+      </form>
+      <p class="wl-msg mt-4 text-sm min-h-[20px]"></p>
+      <p class="mt-2 text-xs text-white/35">By joining, you agree to get emails from Prudo (ACCOD INC.) about its launch. Unsubscribe anytime. <a href="privacy.html" class="underline underline-offset-2 hover:text-white/70">Privacy notice</a></p>
     </div>
   </section>
 
 </main>
 
 <script>
+  // Waitlist: emails go straight into the Supabase table `waitlist` (insert only).
+  const WL_URL = 'https://xrpjqptjmnfbggfxjfin.supabase.co/rest/v1/waitlist';
+  const WL_KEY = 'sb_publishable_jS5L2Pm-BcaAlCrl0XUhig_1Kk4JmI1';
+  document.querySelectorAll('.wl-form').forEach((form) => {
+    const msg = form.parentElement.querySelector('.wl-msg');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = form.email.value.trim().toLowerCase();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        msg.textContent = 'That email doesn\'t look right.';
+        msg.className = 'wl-msg mt-4 text-sm min-h-[20px] text-red-300';
+        return;
+      }
+      const btn = form.querySelector('button');
+      btn.disabled = true; btn.style.opacity = '0.6';
+      try {
+        const params = new URLSearchParams(location.search);
+        const res = await fetch(WL_URL, {
+          method: 'POST',
+          headers: { apikey: WL_KEY, Authorization: 'Bearer ' + WL_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+          body: JSON.stringify({ email, source: params.get('ref') || 'website' }),
+        });
+        if (res.ok || res.status === 409) { // 409 = already on the list
+          form.style.display = 'none';
+          msg.textContent = 'You\'re on the list. We\'ll email you when Prudo is ready.';
+          msg.className = 'wl-msg mt-4 text-base min-h-[20px] text-prudoLight';
+          return;
+        }
+        throw new Error(res.status);
+      } catch (err) {
+        msg.textContent = 'Something went wrong. Please try again.';
+        msg.className = 'wl-msg mt-4 text-sm min-h-[20px] text-red-300';
+      }
+      btn.disabled = false; btn.style.opacity = '1';
+    });
+  });
+
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
   // Hero entrance
@@ -323,61 +397,34 @@
     .to('.hero-text > *', { opacity: 1, y: 0, duration: 1.1, stagger: 0.14, delay: 0.15 })
     .to('.hero-visual', { opacity: 1, y: 0, scale: 1, duration: 1.2 }, 0.3);
 
-  document.getElementById('cta-scroll').addEventListener('click', () => {
-    goTo(1);
-  });
-
+  document.getElementById('cta-scroll').addEventListener('click', () => goTo(1));
+  document.getElementById('nav-waitlist').addEventListener('click', (e) => { e.preventDefault(); goTo(4); });
   document.querySelectorAll('.continue-btn').forEach((btn) => {
     btn.addEventListener('click', () => goTo(parseInt(btn.dataset.next, 10)));
   });
 
-  // Section 2 — reports text + chart reveal, chart draws
-  gsap.set('.eng-text > *, .report-visual', { opacity: 0, y: 32 });
-  ScrollTrigger.create({
-    trigger: '#sec-2',
-    start: 'top 65%',
-    onEnter: () => {
-      gsap.to('.eng-text > *', { opacity: 1, y: 0, duration: 1, stagger: 0.13, ease: 'power4.out' });
-      gsap.to('.report-visual', { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
-      gsap.to('#chart-line', { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut', delay: 0.35 });
-      gsap.from('#chart-fill', { opacity: 0, duration: 1.3, delay: 0.7 });
-    },
-    once: true,
-  });
+  function reveal(sec, text, visual, extra) {
+    gsap.set(`${text} > *, ${visual}`, { opacity: 0, y: 32 });
+    ScrollTrigger.create({
+      trigger: sec,
+      start: 'top 65%',
+      onEnter: () => {
+        gsap.to(`${text} > *`, { opacity: 1, y: 0, duration: 1, stagger: 0.13, ease: 'power4.out' });
+        gsap.to(visual, { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
+        if (extra) extra();
+      },
+      once: true,
+    });
+  }
+  reveal('#sec-2', '.s2-text', '.s2-visual', () => { gsap.to('#chart-line', { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut', delay: 0.35 }); gsap.from('#chart-fill, #chart-dot, #chart-dot2', { opacity: 0, duration: 1.2, delay: 1.2 }); });
+  reveal('#sec-3', '.s3-text', '.s3-visual', () => gsap.to('#tide', { height: '62%', duration: 2.2, ease: 'power2.inOut', delay: 0.5 }));
+  reveal('#sec-4', '.s4-text', '.s4-visual');
 
-  // Section 3 — customizability text + feedback mockup reveal
-  gsap.set('.per-text > *, .per-visual', { opacity: 0, y: 32 });
-  ScrollTrigger.create({
-    trigger: '#sec-3',
-    start: 'top 65%',
-    onEnter: () => {
-      gsap.to('.per-text > *', { opacity: 1, y: 0, duration: 1, stagger: 0.13, ease: 'power4.out' });
-      gsap.to('.per-visual', { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
-    },
-    once: true,
-  });
-
-  // Section 4 — sessions text + timer mockup reveal, tide rises
-  gsap.set('.eng-text-2 > *, .eng-visual-2', { opacity: 0, y: 32 });
-  ScrollTrigger.create({
-    trigger: '#sec-4',
-    start: 'top 65%',
-    onEnter: () => {
-      gsap.to('.eng-text-2 > *', { opacity: 1, y: 0, duration: 1, stagger: 0.13, ease: 'power4.out' });
-      gsap.to('.eng-visual-2', { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
-      gsap.to('#tide', { height: '62%', duration: 2.2, ease: 'power2.inOut', delay: 0.5 });
-    },
-    once: true,
-  });
-
-  // Final CTA fade
-  gsap.set('#sec-5 .text-center > *', { opacity: 0, y: 26 });
+  gsap.set('#sec-5 .s5 > *', { opacity: 0, y: 26 });
   ScrollTrigger.create({
     trigger: '#sec-5',
     start: 'top 75%',
-    onEnter: () => {
-      gsap.to('#sec-5 .text-center > *', { opacity: 1, y: 0, duration: 0.9, stagger: 0.13, ease: 'power4.out' });
-    },
+    onEnter: () => gsap.to('#sec-5 .s5 > *', { opacity: 1, y: 0, duration: 0.9, stagger: 0.13, ease: 'power4.out' }),
     once: true,
   });
 
@@ -392,7 +439,7 @@
       duration: 1.4,
       ease: 'power4.inOut',
       scrollTo: { y: sections[index], autoKill: false },
-      onComplete: () => { scrollingLock = false; },
+      onComplete: () => { scrollingLock = false; currentIndex = index; },
     });
   }
 
